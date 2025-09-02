@@ -28,7 +28,7 @@ for:
       - dotnet restore ./build/_build.csproj
 
     build_script:
-      - nuke FullBuild --isrc true --version "%base_version%" --buildno "%APPVEYOR_BUILD_NUMBER%"
+      - nuke CI --isrc true --version "%base_version%" --buildno "%APPVEYOR_BUILD_NUMBER%"
 
   - 
     branches:
@@ -46,7 +46,7 @@ for:
       - dotnet restore ./build/_build.csproj
 
     build_script:
-      - nuke FullBuild --isrc false --version "%base_version%" --buildno "%APPVEYOR_BUILD_NUMBER%"
+      - nuke CI --isrc false --version "%base_version%" --buildno "%APPVEYOR_BUILD_NUMBER%"
 
 #---------------------------------#
 #      artifacts configuration    #
