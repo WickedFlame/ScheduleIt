@@ -45,12 +45,10 @@
         [Test]
         public void TaskStart_StartNew_Dispose()
         {
-            var running = true;
-
             var starter = new TaskStart();
             starter.StartNew(() =>
             {
-                while (running)
+                while (true)
                 {
                     starter.CancellationToken.ThrowIfCancellationRequested();
                     // loop
