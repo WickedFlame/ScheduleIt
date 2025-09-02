@@ -17,14 +17,14 @@ namespace ScheduleIt.Test.Diagnostics
         }
 
         [Test]
-        public async Task Monitor_Running_OnlyActive()
+        public void Monitor_Running_OnlyActive()
         {
             using var server = new TaskServer();
-            server.Schedule(new TestTask(() => { Task.Delay(100).Wait(); }), s => s.Now().AndEvery(2).Seconds());
-            server.Schedule(new TestTask(() => { Task.Delay(100).Wait(); }), s => s.Now());
+            server.Schedule(new TestTask(() => { Task.Delay(200).Wait(); }), s => s.Now().AndEvery(2).Seconds());
+            server.Schedule(new TestTask(() => { Task.Delay(200).Wait(); }), s => s.Now());
             server.Schedule(new TestTask(() => { }), s => s.In(TimeSpan.FromMinutes(1)));
 
-            await Task.Delay(50);
+            Task.Delay(50).Wait();
 
             var monitor = new Monitor(server);
             monitor.Running.Should().HaveCount(2);
