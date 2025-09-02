@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScheduleIt", "src\ScheduleIt\ScheduleIt.csproj", "{FE79EB38-7EBD-4D1B-881D-604F1B8781A6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScheduleIt.Test", "src\Tests\ScheduleIt.Test\ScheduleIt.Test.csproj", "{147627DB-4385-4BE3-9B12-4ED0F5DD4CBD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{BFDAF933-551E-4A33-B0CC-21CDE94831B6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4C4D171B-9953-473F-91DD-48CD46961222}"
+	ProjectSection(SolutionItems) = preProject
+		.gitlab-ci.yml = .gitlab-ci.yml
+		BuildAndTest.msbuild = BuildAndTest.msbuild
+		CHANGELOG.md = CHANGELOG.md
+		README.md = README.md
+		Sonar.msbuild = Sonar.msbuild
+		testenvironments.json = testenvironments.json
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\_build.csproj", "{388D419E-6045-47F8-9DB6-5CAC47D3BB9B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScheduleIt.TestApp", "src\Tests\ScheduleIt.TestApp\ScheduleIt.TestApp.csproj", "{E8E55B22-43E9-4FA7-A388-8E589D1971C9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE79EB38-7EBD-4D1B-881D-604F1B8781A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE79EB38-7EBD-4D1B-881D-604F1B8781A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE79EB38-7EBD-4D1B-881D-604F1B8781A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE79EB38-7EBD-4D1B-881D-604F1B8781A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{147627DB-4385-4BE3-9B12-4ED0F5DD4CBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{147627DB-4385-4BE3-9B12-4ED0F5DD4CBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{147627DB-4385-4BE3-9B12-4ED0F5DD4CBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{147627DB-4385-4BE3-9B12-4ED0F5DD4CBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{388D419E-6045-47F8-9DB6-5CAC47D3BB9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{388D419E-6045-47F8-9DB6-5CAC47D3BB9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8E55B22-43E9-4FA7-A388-8E589D1971C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8E55B22-43E9-4FA7-A388-8E589D1971C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8E55B22-43E9-4FA7-A388-8E589D1971C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8E55B22-43E9-4FA7-A388-8E589D1971C9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{147627DB-4385-4BE3-9B12-4ED0F5DD4CBD} = {BFDAF933-551E-4A33-B0CC-21CDE94831B6}
+		{388D419E-6045-47F8-9DB6-5CAC47D3BB9B} = {4C4D171B-9953-473F-91DD-48CD46961222}
+		{E8E55B22-43E9-4FA7-A388-8E589D1971C9} = {BFDAF933-551E-4A33-B0CC-21CDE94831B6}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5E1B527D-A71B-4354-998B-1F84F364DE64}
+	EndGlobalSection
+EndGlobal

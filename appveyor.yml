@@ -1,0 +1,73 @@
+# http://www.appveyor.com/docs/appveyor-yml
+
+environment:
+  base_version: 1.0.0
+
+version: $(base_version).{build}
+
+# you can use {branch} name in version format too
+# version: 1.0.{build}-{branch}
+
+image:
+  - Visual Studio 2022
+
+for:
+  - 
+    branches:
+      # whitelist
+      only:
+        - dev
+
+    # Do not build on tags (GitHub only)
+    skip_tags: true
+
+    install:
+      - dotnet tool install Nuke.GlobalTool --global --version 9.0.4 --no-cache
+
+    before_build:
+      - dotnet restore ./build/_build.csproj
+
+    build_script:
+      - nuke FullBuild --isrc true --version "%base_version%" --buildno "%APPVEYOR_BUILD_NUMBER%"
+
+  - 
+    branches:
+      # whitelist
+      only:
+        - master
+
+    # Do not build on tags (GitHub only)
+    skip_tags: true
+
+    install:
+      - dotnet tool install Nuke.GlobalTool --global --version 9.0.4 --no-cache
+
+    before_build:
+      - dotnet restore ./build/_build.csproj
+
+    build_script:
+      - nuke FullBuild --isrc false --version "%base_version%" --buildno "%APPVEYOR_BUILD_NUMBER%"
+
+#---------------------------------#
+#      artifacts configuration    #
+#---------------------------------#
+
+artifacts:
+  - path: src\ScheduleIt\bin\Release\netstandard2.0\ScheduleIt.dll
+    name: ScheduleIt.dll
+  - path: src\ScheduleIt\bin\Release\netstandard2.0\ScheduleIt.xml
+    name: ScheduleIt.xml
+  # pushing all *.nupkg files in directory
+  - path: '**\*.nupkg'
+  
+# providers: Local, FTP, WebDeploy, AzureCS, AzureBlob, S3, NuGet, Environment
+# provider names are case-sensitive!
+# deploy:
+    # Deploying to NuGet feed
+#  - provider: NuGet
+#    server: https://my.nuget.server/feed
+#    api_key: 
+#      secure: UlhUOcqPXsN837S8VwqMZ+10mKTxkqlnvCS5mwSyUGkFwwukfBtvXNpX81+bjS1j
+#    skip_symbols: true
+#    symbol_server: https://your.symbol.server/feed
+#    artifact: MeasureMap.nupkg
