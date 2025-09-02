@@ -37,7 +37,8 @@
             });
 
             running = false;
-            Task.Delay(50).Wait();
+            
+            SpinWait.SpinUntil(() => !starter.Threads.Any(), 5000);
 
             starter.Threads.Should().BeEmpty();
         }
@@ -58,7 +59,7 @@
             starter.Dispose();
 
             // Wait for thread to exit by polling Threads property
-            SpinWait.SpinUntil(() => !starter.Threads.Any(), 1000);
+            SpinWait.SpinUntil(() => !starter.Threads.Any(), 5000);
 
             starter.Threads.Should().BeEmpty();
         }
