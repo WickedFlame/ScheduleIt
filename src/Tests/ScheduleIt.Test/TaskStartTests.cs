@@ -57,9 +57,14 @@
 
             starter.Dispose();
 
-            Task.Delay(50).Wait();
+            // Wait for thread to exit by polling Threads property
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+            while (starter.Threads.Any() && sw.ElapsedMilliseconds < 1000)
+            {
+                Thread.Sleep(10);
+            }
 
-            starter.Threads.Should().HaveCount(0);
+            starter.Threads.Should().BeEmpty();
         }
     }
 }
