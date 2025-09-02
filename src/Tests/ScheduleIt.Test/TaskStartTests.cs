@@ -37,7 +37,8 @@
             });
 
             running = false;
-            Task.Delay(50).Wait();
+            
+            SpinWait.SpinUntil(() => !starter.Threads.Any(), 5000);
 
             starter.Threads.Should().BeEmpty();
         }
@@ -45,12 +46,10 @@
         [Test]
         public void TaskStart_StartNew_Dispose()
         {
-            var running = true;
-
             var starter = new TaskStart();
             starter.StartNew(() =>
             {
-                while (running)
+                while (true)
                 {
                     starter.CancellationToken.ThrowIfCancellationRequested();
                     // loop
@@ -59,7 +58,8 @@
 
             starter.Dispose();
 
-            Task.Delay(50).Wait();
+            // Wait for thread to exit by polling Threads property
+            SpinWait.SpinUntil(() => !starter.Threads.Any(), 5000);
 
             starter.Threads.Should().BeEmpty();
         }

@@ -153,7 +153,6 @@ namespace ScheduleIt
         /// Remove the scheduled task. Running tasks will not be stoped
         /// </summary>
         /// <param name="server"></param>
-        /// <param name="name"></param>
         public static void Remove<T>(this ITaskServer server) where T : class, IBackgroundTask
         {
             server.Scheduler.Remove(typeof(T).Name);

@@ -14,6 +14,7 @@ namespace ScheduleIt.TimeUnits
         ///
         /// </summary>
         /// <param name="schedule"></param>
+        /// <param name="time"></param>
         public DateTimeUnit(Schedule schedule, DateTime time)
         {
             _schedule = schedule;

@@ -9,7 +9,7 @@ namespace ScheduleIt
     /// </summary>
     public class TaskList : IEnumerable<IBackgroundTask>
     {
-        public readonly object _locker = new();
+        private readonly object _locker = new();
         private readonly List<IBackgroundTask> _tasks = new();
 
         /// <summary>
@@ -71,6 +71,10 @@ namespace ScheduleIt
             return _tasks.GetEnumerator();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
