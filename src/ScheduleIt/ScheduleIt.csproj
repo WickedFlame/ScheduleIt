@@ -1,32 +1,40 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-      <TargetFrameworks>netstandard2.0</TargetFrameworks>
-      <LangVersion>latest</LangVersion>
-      <IncludeSymbols>true</IncludeSymbols>
-      <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-      <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-      <Authors>Chris Walpen</Authors>
-      <Company>WickedFlame</Company>
-      <Description>.NET Task execution and scheduling Component</Description>
-      <Copyright>@WickedFlame 2025</Copyright>
-      <PackageTags>Tasks Scheduler</PackageTags>
-      <NeutralLanguage>de</NeutralLanguage>
-      <Version>1.0.0.0</Version>
-      <AssemblyVersion>2.0.0</AssemblyVersion>
-      <FileVersion>3.0.0.0</FileVersion>
-      <PackageVersion>4.0.0</PackageVersion>
-      <InformationalVersion>5.0.0</InformationalVersion>
-      <Title>ScheduleIt</Title>
-      <PublishRepositoryUrl>true</PublishRepositoryUrl>
-      <PackageReadmeFile>README.md</PackageReadmeFile>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Chris Walpen</Authors>
+    <Company>WickedFlame</Company>
+    <Description>.NET Task execution and scheduling Component</Description>
+    <Copyright>@WickedFlame 2025</Copyright>
+    <PackageTags>Tasks Scheduler</PackageTags>
+    <NeutralLanguage>de</NeutralLanguage>
+    <Version>1.0.0.0</Version>
+    <AssemblyVersion>2.0.0</AssemblyVersion>
+    <FileVersion>3.0.0.0</FileVersion>
+    <PackageVersion>4.0.0</PackageVersion>
+    <InformationalVersion>5.0.0</InformationalVersion>
+    <Title>ScheduleIt</Title>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-        <DocumentationFile>bin\Release\netstandard2.0\ScheduleIt.xml</DocumentationFile>
-    </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard2.0\ScheduleIt.xml</DocumentationFile>
+  </PropertyGroup>
 
-    <ItemGroup>
-      <None Include="..\..\README.md" Pack="true" PackagePath="\" />
-    </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
 </Project>
