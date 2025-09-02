@@ -27,7 +27,7 @@ namespace ScheduleIt
             _taskStart = new TaskStart();
             Store = new TaskStore(new StoreOptions());
 
-            Tasks = new TaskList();
+            Tasks = [];
         }
 
         /// <summary>

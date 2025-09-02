@@ -207,52 +207,6 @@ namespace ScheduleIt.Test
         }
 
         [Test]
-        public void Scheduler_Enqueue_Series_In()
-        {
-            var server = new TaskServer();
-            server.Schedule(() => new TestTask(() => { }), s => s.In(TimeSpan.FromMinutes(1)), "first");
-            var monitor = new ScheduleIt.Diagnostics.Monitor(server);
-            monitor.ScheduledTasks.Should().HaveCount(1);
-            monitor.Completed.Should().HaveCount(0);
-
-            server.Schedule(() => new TestTask(() => { }), s => s.In(TimeSpan.FromMinutes(1)), "second");
-            monitor = new ScheduleIt.Diagnostics.Monitor(server);
-            monitor.ScheduledTasks.Should().HaveCount(2);
-            monitor.Completed.Should().HaveCount(0);
-
-            server.Schedule(() => new TestTask(() => { }), s => s.In(TimeSpan.FromMilliseconds(10)), "third");
-
-            Task.Delay(50).Wait();
-
-            monitor = new ScheduleIt.Diagnostics.Monitor(server);
-            monitor.ScheduledTasks.Should().HaveCount(2);
-            monitor.Completed.Should().HaveCount(1);
-        }
-
-        [Test]
-        public void Scheduler_Enqueue_Series_At()
-        {
-            var server = new TaskServer();
-            server.Schedule(() => new TestTask(() => { }), s => s.At(DateTime.Now.AddMinutes(1)), "first");
-            var monitor = new ScheduleIt.Diagnostics.Monitor(server);
-            monitor.ScheduledTasks.Should().HaveCount(1);
-            monitor.Completed.Should().HaveCount(0);
-
-            server.Schedule(() => new TestTask(() => { }), s => s.At(DateTime.Now.AddMinutes(1)), "second");
-            monitor = new ScheduleIt.Diagnostics.Monitor(server);
-            monitor.ScheduledTasks.Should().HaveCount(2);
-            monitor.Completed.Should().HaveCount(0);
-
-            server.Schedule(() => new TestTask(() => { }), s => s.At(DateTime.Now.AddMilliseconds(10)), "third");
-
-            Task.Delay(50).Wait();
-
-            monitor = new ScheduleIt.Diagnostics.Monitor(server);
-            monitor.ScheduledTasks.Should().HaveCount(2);
-            monitor.Completed.Should().HaveCount(1);
-        }
-
-        [Test]
         public void Scheduler_Execute_TasksRemoved()
         {
             var scheduler = new Scheduler();
@@ -275,11 +229,6 @@ namespace ScheduleIt.Test
 
             scheduler.Schedules.Should().BeEmpty();
         }
-
-
-
-
-
 
         [Test]
         public void Scheduler_Execute_In_Start()

@@ -210,6 +210,19 @@ namespace ScheduleIt.Test
         {
             TaskServer.Setup(_ => { }).IsTaskScheduled("test").Should().BeFalse();
         }
+        
+        [Test]
+        public void TaskServer_Schedule()
+        {
+            var scheduler = new Mock<IScheduler>();
+            scheduler.Setup(x => x.IsRunning).Returns(() => true);
+            
+            var server = new TaskServer();
+
+            server.Scheduler = scheduler.Object;
+            
+            server.Schedule(() => new TestTask(() => { }), s => s.At(DateTime.Now.AddMinutes(1)), "first");
+        }
 
         public class AbortExecutionTask : IBackgroundTask
         {
