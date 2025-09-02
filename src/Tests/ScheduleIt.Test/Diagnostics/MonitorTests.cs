@@ -1,56 +1,85 @@
-﻿using Monitor = ScheduleIt.Diagnostics.Monitor;
+﻿using ScheduleIt.Diagnostics;
+using ScheduleIt.Scheduling;
+using ScheduleIt.Storage;
+using Monitor = ScheduleIt.Diagnostics.Monitor;
 
 namespace ScheduleIt.Test.Diagnostics
 {
     public class MonitorTests
     {
+        private Mock<ITaskServer> _server;
+        private List<TaskEntity> _tasks;
+        private List<TaskSchedule> _schedules;
+
+        [SetUp]
+        public void Setup()
+        {
+            _tasks = [];
+            var store = new Mock<ITaskStore>();
+            store.Setup(x => x.GetEnumerator()).Returns(() => _tasks.GetEnumerator());
+            
+            _server = new Mock<ITaskServer>();
+            _server.Setup(x => x.Store).Returns(() => store.Object);
+
+            _schedules = [];
+            _server.Setup(x => x.Scheduler.Schedules).Returns(() => _schedules);
+        }
+        
         [Test]
         public void Monitor_Running()
         {
-            using var server = new TaskServer();
-            server.Schedule(new TestTask(() => { Task.Delay(100).Wait(); }), s => s.Now());
+            _tasks =
+            [
+                new TaskEntity { State = TaskState.Started }
+            ];
 
-            Task.Delay(50).Wait();
-
-            var monitor = new Monitor(server);
+            var monitor = new Monitor(_server.Object);
             monitor.Running.Should().HaveCount(1);
         }
 
         [Test]
         public void Monitor_Running_OnlyActive()
         {
-            using var server = new TaskServer();
-            server.Schedule(new TestTask(() => { Task.Delay(200).Wait(); }), s => s.Now().AndEvery(2).Seconds());
-            server.Schedule(new TestTask(() => { Task.Delay(200).Wait(); }), s => s.Now());
-            server.Schedule(new TestTask(() => { }), s => s.In(TimeSpan.FromMinutes(1)));
-
-            Task.Delay(10).Wait();
-
-            var monitor = new Monitor(server);
+            _tasks =
+            [
+                new TaskEntity { State = TaskState.Started },
+                new TaskEntity { State = TaskState.Started },
+                new TaskEntity { State = TaskState.Completed }
+            ];
+                
+            var monitor = new Monitor(_server.Object);
             monitor.Running.Should().HaveCount(2);
         }
 
         [Test]
         public void Monitor_ScheduledTasks()
         {
-            using var server = new TaskServer();
-            server.Schedule(new TestTask(() => { }), s => s.Now().AndEvery(2).Seconds());
-            server.Schedule(new TestTask(() => { }), s => s.In(TimeSpan.FromMinutes(1)));
+            _schedules =
+            [
+                new TaskSchedule{ Name = "one", Schedule = new Schedule()},
+                new TaskSchedule{ Name = "two", Schedule = new Schedule()}
+            ];
 
-            var monitor = new Monitor(server);
+            var monitor = new Monitor(_server.Object);
             monitor.ScheduledTasks.Should().HaveCount(2);
         }
 
         [Test]
         public void Monitor_ScheduledTasks_OnlyActive()
         {
-            using var server = new TaskServer();
-            server.Schedule(new TestTask(() => { }), s => s.Now());
-            server.Schedule(new TestTask(() => { }), s => s.In(TimeSpan.FromMinutes(1)));
+            _schedules =
+            [
+                new TaskSchedule{ Name = "one", Schedule = new Schedule()}
+            ];
 
-            Task.Delay(200).Wait();
-
-            var monitor = new Monitor(server);
+            _tasks =
+            [
+                new TaskEntity { State = TaskState.Started },
+                new TaskEntity { State = TaskState.Started },
+                new TaskEntity { State = TaskState.Completed }
+            ];
+            
+            var monitor = new Monitor(_server.Object);
             monitor.ScheduledTasks.Should().HaveCount(1);
         }
 
