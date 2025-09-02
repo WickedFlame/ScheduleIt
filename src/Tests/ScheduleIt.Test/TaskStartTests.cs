@@ -59,7 +59,7 @@
 
             Task.Delay(50).Wait();
 
-            starter.Threads.Should().BeEmpty();
+            starter.Threads.Should().HaveCount(0);
         }
     }
 }
