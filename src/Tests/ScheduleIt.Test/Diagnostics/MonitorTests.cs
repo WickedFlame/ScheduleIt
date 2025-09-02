@@ -24,7 +24,7 @@ namespace ScheduleIt.Test.Diagnostics
             server.Schedule(new TestTask(() => { Task.Delay(200).Wait(); }), s => s.Now());
             server.Schedule(new TestTask(() => { }), s => s.In(TimeSpan.FromMinutes(1)));
 
-            Task.Delay(50).Wait();
+            Task.Delay(10).Wait();
 
             var monitor = new Monitor(server);
             monitor.Running.Should().HaveCount(2);
