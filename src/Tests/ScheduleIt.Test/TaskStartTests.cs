@@ -58,11 +58,7 @@
             starter.Dispose();
 
             // Wait for thread to exit by polling Threads property
-            var sw = System.Diagnostics.Stopwatch.StartNew();
-            while (starter.Threads.Any() && sw.ElapsedMilliseconds < 1000)
-            {
-                Thread.Sleep(10);
-            }
+            SpinWait.SpinUntil(() => !starter.Threads.Any(), 1000);
 
             starter.Threads.Should().BeEmpty();
         }
