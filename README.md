@@ -1,6 +1,10 @@
 # ScheduleIt
-Job Scheduler for .Net
 
+Need a Job to be executed later?  
+Then **Schedule It**!
+
+Job Scheduler for .Net
+  
 ## Setup
 ```csharp
 TaskServer.Setup(c =>

@@ -26,6 +26,11 @@ namespace ScheduleIt
         /// </summary>
         public List<Action<ITaskServer>> ServerTasks { get; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="server"></param>
+        /// <returns></returns>
         public TaskServerBuilder SetServer(ITaskServer server)
         {
             _server = server;
@@ -106,6 +111,12 @@ namespace ScheduleIt
             return builder;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="scheduler"></param>
+        /// <returns></returns>
         public static TaskServerBuilder UseScheduler(this TaskServerBuilder builder, IScheduler scheduler)
         {
             builder.ServerTasks.Add(s => s.Scheduler = scheduler);

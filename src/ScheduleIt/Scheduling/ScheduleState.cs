@@ -24,6 +24,10 @@
         /// The schedule was removed from the execution
         /// </summary>
         Removed,
+
+        /// <summary>
+        /// 
+        /// </summary>
         Failed
     }
 }

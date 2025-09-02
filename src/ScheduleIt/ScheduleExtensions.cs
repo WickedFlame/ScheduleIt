@@ -12,7 +12,6 @@ namespace ScheduleIt
         /// Create a <see cref="ScheduleTime"/> that calculates the next schedule based on a unit of 1. Allows further configuration with the returned <see cref="ScheduleTime"/>
         /// </summary>
         /// <param name="schedule"></param>
-        /// <param name="interval"></param>
         /// <returns></returns>
         public static ScheduleTime Every(this Schedule schedule)
             => schedule.Every(1);
